@@ -1,12 +1,12 @@
 use dioxus::prelude::*;
 use reaxive::prelude::*;
 
-use crate::stores::use_counter;
+use crate::stores::counter_store::CounterStore;
 
-reactive! {
+reaxive! {
     #[component]
     pub fn UserPage() -> Element {
-        let store = use_counter();
+        let store = CounterStore::new();
 
         rsx! {
             div { class: "user-page",

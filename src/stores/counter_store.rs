@@ -1,7 +1,6 @@
-use reaxive::prelude::*;
+use dioxus::prelude::*;
 use reaxive::prelude::*;
 
-// Создаем структуру пользователя
 #[derive(Clone, Debug)]
 pub struct User {
     pub name: String,
@@ -24,11 +23,11 @@ reaxive_store!(CounterStore {
 
 impl CounterStore {
     pub fn increment(&self) {
-        self.count.update(|count| *count += 1);
+        self.count.set(|count| *count += 1);
     }
 
     pub fn decrement(&self) {
-        self.count.update(|count| *count -= 1);
+        self.count.set(|count| *count -= 1);
     }
 
     pub fn get_count(&self) -> i32 {
@@ -36,11 +35,11 @@ impl CounterStore {
     }
 
     pub fn set_name(&self, name: String) {
-        self.user.update(|user| user.name = name);
+        self.user.set(|user| user.name = name);
     }
 
     pub fn set_last_name(&self, last_name: String) {
-        self.user.update(|user| user.last_name = last_name);
+        self.user.set(|user| user.last_name = last_name);
     }
 
     pub fn get_user(&self) -> User {
@@ -62,10 +61,6 @@ impl CounterStore {
     }
 
     pub fn reset_user(&self) {
-        self.user.set(User::default());
+        self.user.assign(User::default());
     }
-}
-
-pub fn use_counter() -> CounterStore {
-    use_store::<CounterStore>()
 }
